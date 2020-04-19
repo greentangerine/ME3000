@@ -27,6 +27,11 @@ class ME3000:
         self.serial_port = self.get_serial_port()
 
 
+    def connect(self):
+        if self.serial_port is not None:
+            self.serial_port = self.get_serial_port()
+
+
     def get_serial_port(self):
         """ Return serial.Serial instance, ready to use for RS485."""
         port = Serial(port=self.port_id, baudrate=9600, parity=PARITY_NONE,
@@ -34,8 +39,14 @@ class ME3000:
         return port
 
 
+    def disconnect(self):
+        if self.serial_port is not None:
+          self.close_serial_port()
+
+
     def close_serial_port(self):
         self.serial_port.close()
+        self.serial_port = None
 
 
     def set_auto(self):

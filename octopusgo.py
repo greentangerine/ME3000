@@ -48,4 +48,4 @@ if status:
             if retval != 0:
                 print("Set auto failed", hex(response))
 
-roo.close_serial_port()
+roo.disconnect()
