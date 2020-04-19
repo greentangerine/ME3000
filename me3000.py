@@ -52,9 +52,9 @@ class ME3000:
     def set_auto(self):
         """ Switch inverter to AUTO."""
         ret_status = True
-        message = rtu.write_passive_register(slave_id=self.slave_id, 
-                                             address=self.AUTO, 
-                                             value=0)
+        message = write_passive_register(slave_id=self.slave_id, 
+                                         address=self.AUTO, 
+                                         value=0)
         try:
             response = rtu.send_message(message, self.serial_port)
         except:
@@ -66,9 +66,9 @@ class ME3000:
     def set_charge(self, charge):
         """ Set charge value."""
         ret_status = True
-        message = rtu.write_passive_register(slave_id=self.slave_id, 
-                                             address=self.CHARGE, 
-                                             value=charge)
+        message = write_passive_register(slave_id=self.slave_id, 
+                                         address=self.CHARGE, 
+                                         value=charge)
         try:
             response = rtu.send_message(message, self.serial_port)
         except:
@@ -80,9 +80,9 @@ class ME3000:
     def set_discharge(self, discharge):
         """ Set discharge value."""
         ret_status = True
-        message = rtu.write_passive_register(slave_id=self.slave_id, 
-                                             address=self.DISCHARGE, 
-                                             value=discharge)
+        message = write_passive_register(slave_id=self.slave_id, 
+                                         address=self.DISCHARGE, 
+                                         value=discharge)
         try:
             response = rtu.send_message(message, self.serial_port)
         except:
@@ -146,4 +146,18 @@ class ME3000:
             response = [-1]
         return ret_status, response[0]
 
+
+from umodbus.functions import WritePassiveRegister
+
+def write_passive_register(slave_id, address, value):
+    """ Return ADU for Modbus extended function code 66: Write Passive Register.
+
+    :param slave_id: Number of slave.
+    :return: Byte array with ADU.
+    """
+    function = WritePassiveRegister()
+    function.address = address
+    function.value = value
+
+    return rtu._create_request_adu(slave_id, function.request_pdu)
 
