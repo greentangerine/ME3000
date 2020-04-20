@@ -23,11 +23,14 @@ if status:
 
 print("Set to auto ...")
 retval = -1
-while retval < 0:
+count = 0
+while retval != 0 and count < 100:
+    count = count + 1
     status, response = roo.set_auto()
     if status:
         retval = response & 0x00FF
-        if retval != 0:
-            print("Set auto failed", hex(response))
+
+if retval != 0:
+    print("Set auto failed", hex(response))
 
 roo.disconnect()
