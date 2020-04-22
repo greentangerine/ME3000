@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import sys
 
 sys.path.insert(0, '/home/pi/ME3000')
-import ME3000 as me
+import me3000 as me
 
 app = Flask(__name__)
 
@@ -46,13 +46,13 @@ def set_pct(pct_val=None):
         if retval != -1:
             return render_template('pct.html', opstr="Current", pctval=retval) 
         else:
-             return render_template('error.html'), 500
+            return render_template('error.html'), 500
     else:
         retval = write_threshold(pct_val)
         if retval != -1:
             return render_template('pct.html', opstr="New", pctval=retval) 
         else:
-             return render_template('error.html'), 500
+            return render_template('error.html'), 500
     
     
 if __name__ == '__main__':
