@@ -31,8 +31,17 @@ status, response = roo.get_battery_percentage()
 if status:
     print(response)
     if response < threshold:
-        print("Below threshold, set to charge 3000W ...")
-        status, response = roo.set_charge(3000)
+        if response <=85:
+            charge_rate = 3000
+        elif response <= 90:
+            charge_rate = 2500
+        elif response <= 95:
+            charge_rate = 2250
+        else:
+            charge_rate = 2000
+        
+        print("Below threshold, set to charge at", charge_rate)
+        status, response = roo.set_charge(charge_rate)
         if status:
             retval = response & 0x00FF
             if retval != 0:

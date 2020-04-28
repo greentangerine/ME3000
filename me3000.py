@@ -70,7 +70,7 @@ class ME3000:
         return ret_status, response
 
 
-    def set_charge(self, charge):
+    def set_charge(self, charge=3000):
         """ Set charge value."""
         ret_status = True
         message = write_passive_register(slave_id=self.slave_id, 
@@ -84,7 +84,7 @@ class ME3000:
         return ret_status, response
 
 
-    def set_discharge(self, discharge):
+    def set_discharge(self, discharge=3000):
         """ Set discharge value."""
         ret_status = True
         message = write_passive_register(slave_id=self.slave_id, 
