@@ -4,10 +4,7 @@ import sys
 sys.path.insert(0, '/home/pi/ME3000')
 from me3000 import ME3000
 from datetime import datetime
-
-SLAVE=0x01
-THRESHOLD_FILE="/home/pi/ME3000/pct.txt"
-SERIAL_PORT="/dev/ttyUSB0"
+from MyME3000 import *
 
 print(datetime.now())
 
