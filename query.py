@@ -28,4 +28,17 @@ status, response = roo.get_battery_percentage()
 if status:
   print(response)
 
+print("Set standby ...")
+status, response = roo.set_standby()
+if status:
+    retval = hex(response & 0x00FF)
+    print(retval)
+
+print("Set auto ...")
+status, response = roo.set_auto()
+if status:
+    retval = hex(response & 0x00FF)
+    print(retval)
+
+
 roo.disconnect()

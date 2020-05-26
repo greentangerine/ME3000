@@ -39,6 +39,8 @@ if status:
             retval = response & 0x00FF
             if retval != 0:
                 print("Set charge failed ...")
+                # reset to auto to be safe ...
+                status, response = roo.set_auto()
     elif invstate == 2 or invstate == 0:
         print("Over threshold and charged, so switch to auto ...")
         status, response = roo.set_auto()
