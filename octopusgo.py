@@ -11,11 +11,11 @@ print(datetime.now())
 try:
     tfile = open(THRESHOLD_FILE, "r")
     threshold = int(tfile.readline().split("=")[-1])
-    if (threshold < 20) or (threshold > 100):
-        threshold = 100
+    if (threshold < MIN_CHARGE) or (threshold > MAX_CHARGE):
+        threshold = MAX_CHARGE
 except:
     # default to fully charged
-    threshold = 100
+    threshold = MAX_CHARGE
 
 roo = ME3000(SERIAL_PORT, SLAVE)
 
